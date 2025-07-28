@@ -1,4 +1,4 @@
-import { Component, computed, signal, Input, input } from '@angular/core';
+import { Component, computed, signal, Input, input, Output, EventEmitter, output } from '@angular/core';
 import { DUMMY_USERS } from '../dummy-users';
 
 const randomIndex = Math.floor(Math.random() * DUMMY_USERS.length);
@@ -10,22 +10,39 @@ const randomIndex = Math.floor(Math.random() * DUMMY_USERS.length);
 })
 
 export class User{
-  //FYI: This @ is known as decorator, it is used to define metadata for the class.
+  //FYI: This @ is known as decorator, it is used to define metadata for the class. Widely used in Angular to define components, directives, pipes, etc.
   // This makes the avatar property available for binding in the template which can be used to set  from .html file. This is known as property binding.
   //This is one way to pass data from parent component to child component in Angular. Uppercase Input is a decorator that marks a class field as an input property, which can receive data from a parent component.
-  // @Input({required:true}) avatar!: string;
-  // @Input({required:true}) name!: string;
+  @Input({required:true}) avatar!: string;
+  @Input({required:true}) name!: string;
+  @Input({required:true}) id!: string;
 
   //Option 2: use lowercase input, this is a more recent feature in Angular, it is used to define an input property that can be bound to a value from the parent component.
-  avatar = input.required<string>();
-  name = input.required<string>();
+  // Read Only signals. Not widely used yet, but a good practice to use input for properties that are required.
+  // avatar = input.required<string>();
+  // name = input.required<string>();
 
-   imagePath = computed(() =>  {return 'assets/users/' + this.avatar();});
+  //  imagePath = computed(() =>  {return 'assets/users/' + this.avatar();});
 
+  get imagePath() {
+    return 'assets/users/' + this.avatar; 
+  }
   get userName() {
     return this.name;
   }
-  onSelectUser() {}
+
+  //FYI to output that the user was selected, we can use an output property.
+  // @Output() userSelected = new EventEmitter<string>();
+  @Output() selectedUser = new EventEmitter<string>();
+ onSelectUser() {
+    this.selectedUser.emit(this.id);
+  }
+  
+  //Other way of using output, this is a more recent feature in Angular, it is used to define an output property that can emit events to the parent component.
+  userSelected = output<string>();
+  onUserSelected(){
+    this.userSelected.emit(this.id);
+  }
 }
 
 export class DemoClickableUser {
