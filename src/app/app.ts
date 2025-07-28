@@ -18,8 +18,8 @@ export class App {
   get selectedUser() {
     return this.users.find(user => user.id === this.selectedUserId);
   }
-  
-  get userName() {
+
+  get selectedUserName() {
     return this.selectedUser ? this.selectedUser.name : '';
   }
 
