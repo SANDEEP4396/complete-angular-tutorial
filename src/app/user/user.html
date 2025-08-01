@@ -10,7 +10,7 @@
         <span>{{dynamicUser().name}}</span> 
     </button> -->
 
-    <button (click)="onSelectUser()" >  
+    <button [class.active]="selected" (click)="onSelectUser()" >  
         <img [src]= "imagePath"
          [alt]= "user.name" />
        

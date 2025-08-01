@@ -53,6 +53,9 @@ export class User {
   onUserSelected() {
     this.userSelected.emit(this.user.id);
   }
+
+  @Input({ required: true }) selected!: boolean;
+  
 }
 
 export class DemoClickableUser {
