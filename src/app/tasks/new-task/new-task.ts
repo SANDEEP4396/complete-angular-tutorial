@@ -1,16 +1,18 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, inject, Input, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { NewTaskType } from './new-task.model';
+import { Card } from '../../shared/card/card';
+import { TasksService } from '../tasks.service';
 
 @Component({
   selector: 'app-new-task',
-  imports: [FormsModule],
+  imports: [FormsModule, Card],
   templateUrl: './new-task.html',
   styleUrl: './new-task.css',
 })
 export class NewTask {
-  @Output() cancel = new EventEmitter<void>();
-@Output() addTask = new EventEmitter<NewTaskType>()
+  @Input({ required: true }) userId!: string;
+  @Output() close = new EventEmitter<void>();
   //Using signals to manage form state, they are reactive and can be used to track changes in the form inputs.
   //but it cannot be used to update the form inputs directly in the template.
   //So it not recommened to use two-way data binding with signals
@@ -20,9 +22,10 @@ export class NewTask {
   enteredTitle = '';
   enteredSummary = '';
   enteredDueDate = '';
+  private tasksService = inject(TasksService);
 
   onCancel() {
-    this.cancel.emit();
+    this.close.emit();
   }
 
   onCreateTask() {
@@ -31,13 +34,8 @@ export class NewTask {
       summary: this.enteredSummary,
       dueDate: this.enteredDueDate,
     };
-
-    // Emit the new task to the parent component or handle it as needed
-    console.log('New Task Created:', newTask);
-    this.addTask.emit(newTask);
-    // Reset form fields after creation
-    this.enteredTitle = '';
-    this.enteredSummary = '';
-    this.enteredDueDate = '';
+    this.tasksService.addTask(newTask, this.userId);
+    this.close.emit();
   }
+
 }
