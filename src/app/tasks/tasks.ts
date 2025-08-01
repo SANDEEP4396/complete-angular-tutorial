@@ -29,9 +29,9 @@ export class Tasks {
     return this.tasksService.getTasksByUserId(this.userId);
   }
 
-  onCompleteTask(taskId: string) {
-    this.tasksService.removeTask(taskId);
-  }
+  // onCompleteTask(taskId: string) {
+  //   this.tasksService.removeTask(taskId);
+  // }
 
   // onAddTask(taskData: NewTaskType) {
   //   this.tasksService.addTask(taskData, this.userId);
