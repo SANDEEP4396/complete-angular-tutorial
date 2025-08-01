@@ -1,7 +1,20 @@
-<div>
-    <button>
-        <img [src]="'assets/users/'+selectedUser.avatar" [alt]="selectedUser.name" />
-        <!-- Property binding recommended for images-->
-        <span>{{selectedUser.name}}</span> <!--String interpolation to display user's name feature-->
+<app-card>
+  <!-- FYI: This is know as Event binding to handle click event, this '()' is called event lisenter -->
+     <!-- Property binding recommended for images-->
+      <!--String interpolation to display user's name feature-->
+    <!--
+    <button (click)="onDynamicSelectUser()" >  
+        <img [src]= "dynamicImagePath()"
+         [alt]= "dynamicUser().name" />
+       
+        <span>{{dynamicUser().name}}</span> 
+    </button> -->
+
+    <button [class.active]="selected" (click)="onSelectUser()" >  
+        <img [src]= "imagePath"
+         [alt]= "user.name" />
+       
+        <span>{{user.name}}</span> 
     </button>
-</div>
+</app-card>
+ 
