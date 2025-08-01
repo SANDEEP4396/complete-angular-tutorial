@@ -9,11 +9,8 @@ import {
   output,
 } from '@angular/core';
 import { DUMMY_USERS } from '../dummy-users';
-type UserType ={
-  id: string;
-  name: string;
-  avatar: string;
-}
+import { UserType } from './userType.model';
+
 const randomIndex = Math.floor(Math.random() * DUMMY_USERS.length);
 @Component({
   selector: 'app-user',
