@@ -4,11 +4,12 @@ import { Header } from './header/header';
 import { User } from './user/user';
 import { Tasks } from './tasks/tasks';
 import { BrowserModule } from '@angular/platform-browser';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
     declarations: [App],
     bootstrap: [App],
-    imports: [BrowserModule, Header, User, Tasks],
+    imports: [BrowserModule, FormsModule, Header, User, Tasks]
 })
 export class AppModule {
 

@@ -10,6 +10,7 @@ import { TasksService } from '../tasks.service';
   templateUrl: './new-task.html',
   styleUrl: './new-task.css',
 })
+
 export class NewTask {
   @Input({ required: true }) userId!: string;
   @Output() close = new EventEmitter<void>();
