@@ -1,12 +1,12 @@
 import { Component, EventEmitter, inject, Input, Output } from '@angular/core';
+import { TasksService } from '../tasks.service';
 import { FormsModule } from '@angular/forms';
 import { NewTaskType } from './new-task.model';
 import { Card } from '../../shared/card/card';
-import { TasksService } from '../tasks.service';
 
 @Component({
   selector: 'app-new-task',
-  imports: [FormsModule, Card],
+  standalone: false,
   templateUrl: './new-task.html',
   styleUrl: './new-task.css',
 })
